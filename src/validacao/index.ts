@@ -12,7 +12,8 @@ class ValidarDadosUser {
       erros.email = "Email inválido";
     }
     userDb.add(dados);
-    return dados;
+    return
+    ;
   }
 }
 
