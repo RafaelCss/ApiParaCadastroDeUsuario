@@ -2,11 +2,14 @@
   "name": "back-cadastro",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "src/server.ts",
   "scripts": {
     "dev": "nodemon --exec ts-node src/server.ts",
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "build": "tsc"
+  },
+  "engines": {
+    "node": "16.14.2"
   },
   "keywords": [],
   "author": "",
