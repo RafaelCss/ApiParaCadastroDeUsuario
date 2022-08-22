@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import ValidarDadosUser from "../validacao";
 import { Ilogin } from "../interface";
 
-export const router = Router();
+ const router = Router();
 
 router.post('/', async (req: Request, res: Response) => {
   const dados: Ilogin = req.body;
@@ -16,3 +16,4 @@ router.get('/', async (req: Request, res: Response) => {
   res.send('Dados validos');
 })
 
+export default router;

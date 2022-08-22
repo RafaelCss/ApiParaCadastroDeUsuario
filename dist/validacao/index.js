@@ -22,7 +22,7 @@ class ValidarDadosUser {
                 erros.email = "Email inválido";
             }
             db_1.userDb.add(dados);
-            return dados;
+            return;
         });
     }
 }
