@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Request, Response } from 'express';
-import ValidarDadosUser from "../validacao";
+import ValidarDadosUser from "../Controllers/validacao";
 import { Ilogin } from "../interface";
 
  const router = Router();

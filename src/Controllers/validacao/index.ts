@@ -1,5 +1,5 @@
-import { userDb } from "../data/db";
-import { Ilogin } from "../interface";
+import { userDb } from "../../data/db";
+import { Ilogin } from "../../interface";
 
 class ValidarDadosUser {
   static async validar(dados: Ilogin) {

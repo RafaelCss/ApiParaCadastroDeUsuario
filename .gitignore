@@ -1,4 +1,5 @@
 node_modules
-/dist
-/src/data/certificado.json
+/dist/
+*/src/data/certificado.json
+.env.production
 .env
