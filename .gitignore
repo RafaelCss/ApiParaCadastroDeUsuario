@@ -1,5 +1,5 @@
 node_modules
 /dist/
-*/src/data/certificado.json
-.env.production
+/src/data/cadastrousuarios-172ff-firebase-adminsdk-fe3kw-a93566a58b.json
 .env
+.env.production
