@@ -1,10 +1,10 @@
 import { userDb } from "../../data/db";
 import { Ilogin, IToken } from "../interface";
-import { Request, Response } from 'express'
-import { criarToken , verificarToken } from "./funcoes";
+import { Request, Response, NextFunction } from 'express'
+import { criarToken, verificarToken } from "./funcoes";
 
 
-export async function validarDados(req: Request, res: Response) {
+export async function validarDados(req: Request, res: Response, next: NextFunction) {
   const dados: Ilogin = req.body
   const resposta = await userDb.where('email', '==', dados.email).get()
   if (!resposta.empty) {
@@ -17,30 +17,33 @@ export async function validarDados(req: Request, res: Response) {
         }
       }).status(201).end()
     })
+    next()
+  }else {
+
+    return res.json({
+      erros: {
+        auth: false,
+        usuario: 'usuário não encontrado'
+      }
+    }).status(400)
   }
-  return res.json({
-    erros: {
-      auth : false,
-      usuario: 'usuário não encontrado'
-    }
-  }).status(400)
+  next()
 }
 
-export async function validarToken(req: Request, res: Response) {
-  const token = req.headers['application-authorization']
+export async function validarToken(req: Request, res: Response, next: NextFunction) {
+  const token = req.headers['authorization']
   if (token) {
-  const resposta = await verificarToken(token as string)
-  res.send(resposta).end()
+    const resposta = verificarToken(token as string)
+    return res.send(resposta).end()
   }
-  return res.json({
-    erros: {
-      auth : false,
-      usuario: 'usuário não encontrado'
-    }
-  }).status(400)
+  else{
+    return res.json({
+      erros: {
+        auth: false,
+        usuario: 'usuário não encontrado'
+      }
+    }).status(400)
+  }
 }
 
-
-
-export default validarDados;
 
