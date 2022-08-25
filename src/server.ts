@@ -1,7 +1,7 @@
 import  app  from "./app";
 
 
-const porta = process.env.PORT || 3333;
+const porta = process.env.PORT || 3334;
 
 const server = app.listen(porta, () => console.log(`rodando na porta : ${porta}...`));
 

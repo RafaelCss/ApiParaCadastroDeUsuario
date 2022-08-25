@@ -24,3 +24,8 @@ export interface IloginDataBase extends ServiceAccount{
     auth_provider_x509_cert_url: string;
     client_x509_cert_url: string;
 }
+
+
+export interface IToken {
+    token : string
+ }
