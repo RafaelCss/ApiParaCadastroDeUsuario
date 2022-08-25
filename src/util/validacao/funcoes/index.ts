@@ -4,7 +4,7 @@ dotenv.config()
 
 export  function criarToken(id: string) {
   const criarToken =  Jwt.sign({ userId: id }, process.env.SECRET as string, { expiresIn: 200 })
-  return criarToken
+  return `Bearer ${criarToken} `
 }
 
 export  function verificarToken(token: string) {

@@ -12,7 +12,7 @@ export async function validarDados(req: Request, res: Response) {
       return res.send({
         dados: {
           auth: true,
-          token: `Bearer ${criarToken(item.id)}`,
+          token: criarToken(item.id),
           usuario: dados.email
         }
       }).status(201).end()
@@ -27,7 +27,7 @@ export async function validarDados(req: Request, res: Response) {
 }
 
 export async function validarToken(req: Request, res: Response) {
-  const token  = req.headers['application-authorization']
+  const token = req.headers['application-authorization']
   if (token) {
   const resposta = await verificarToken(token as string)
   res.send(resposta).end()
