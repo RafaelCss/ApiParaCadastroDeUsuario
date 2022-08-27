@@ -1,12 +1,14 @@
 import { userDb } from "../../data/db";
-import { Ilogin, IToken } from "../interface";
+import { Ilogin } from "../interface";
 import { Request, Response, NextFunction } from 'express'
 import { criarToken, verificarToken } from "./funcoes";
 
-
+//#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
   const dados: Ilogin = req.body
-  const resposta = await userDb.where('email', '==', dados.email).get()
+  const resposta = await userDb
+    .where('email', '==', dados.email)
+    .where('senha', '==', dados.senha).get()
   if (!resposta.empty) {
     resposta.forEach(item => {
       return res.send({
@@ -18,7 +20,7 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
       }).status(201).end()
     })
     next()
-  }else {
+  } else {
 
     return res.json({
       erros: {
@@ -29,14 +31,15 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
   }
   next()
 }
-
+//#endregion
+//#region  Verificar se o Token está valido
 export async function validarToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization']
   if (token) {
     const resposta = verificarToken(token as string)
     return res.send(resposta).end()
   }
-  else{
+  else {
     return res.json({
       erros: {
         auth: false,
@@ -45,5 +48,5 @@ export async function validarToken(req: Request, res: Response, next: NextFuncti
     }).status(400)
   }
 }
-
+//#endregion
 

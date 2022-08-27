@@ -5,11 +5,10 @@ export interface Ilogin{
     senha:string;
 }
 
-export interface ICadastro{
+export interface Cadastro{
     nome:string;
-    fornecedor:string;
-    valor:number;
-    data:string;
+    email:string;
+    senha:number;
 }
 
 export interface IloginDataBase extends ServiceAccount{
@@ -29,3 +28,23 @@ export interface IloginDataBase extends ServiceAccount{
 export interface IToken {
     token : string
  }
+
+
+ export interface Produtos {
+    nome: string
+    valor: string
+    tipo :TipoProduto
+    fonernecedor : Fornecedor
+  }
+
+  export  interface Fornecedor {
+    telefone : string
+    email :  string
+    vendedor : string
+  }
+
+  export  enum TipoProduto {
+    perecivel = 1 ,
+    limpeza = 2 ,
+    higiene = 3
+  }
