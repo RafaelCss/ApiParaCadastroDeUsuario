@@ -8,7 +8,7 @@ export interface Ilogin{
 export interface Cadastro{
     nome:string;
     email:string;
-    senha:number;
+    senha: string;
 }
 
 export interface IloginDataBase extends ServiceAccount{
@@ -28,7 +28,7 @@ export interface IloginDataBase extends ServiceAccount{
 export interface IToken {
     token : string
  }
-<<<<<<< HEAD
+
 
 
  export interface Produtos {
@@ -49,5 +49,4 @@ export interface IToken {
     limpeza = 2 ,
     higiene = 3
   }
-=======
->>>>>>> 0f390b883e700821059064a1edfb1c0560ecfddc
+
