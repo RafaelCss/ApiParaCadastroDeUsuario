@@ -10,15 +10,12 @@ import { Cadastro } from '../util/interface';
 const router = Router();
 
 router.post('/login', validarDados, async (req: Request, res: Response, next: NextFunction) => {
-  console.log('olá')
-
 })
 
 router.post('/cadastro/usuario', async (req: Request, res: Response, next: NextFunction) => {
-  await salvarUsuario(req.body as Cadastro)
-    .then(retorno => res.json(retorno))
-    .catch(err => res.sendStatus(err)
-    )
+  const resposta = await salvarUsuario(req.body as Cadastro)
+    .then(retorno => res.json(retorno).end())
+    .catch(err => res.sendStatus(err))
 })
 
 
