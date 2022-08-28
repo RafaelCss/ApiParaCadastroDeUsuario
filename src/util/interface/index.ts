@@ -32,11 +32,11 @@ export interface IToken {
 
 
  export interface Produtos {
-    nome: string
-    valor: string
-    tipo :TipoProduto
-    fonernecedor : Fornecedor
-  }
+  nome: string
+  valor: string
+  tipo :TipoProduto
+  fonernecedor : Fornecedor
+}
 
   export  interface Fornecedor {
     telefone : string
@@ -50,3 +50,15 @@ export interface IToken {
     higiene = 3
   }
 
+ // padrão cadastro de produtos
+/*   {
+    "nome"  : "papel",
+    "valor" : "250,00",
+    "tipo"  :"1",
+   "fonernecedor" : {
+    "telefone" : "",
+    "email" :  "",
+    "vendedor" : "string"
+     }
+  }
+ */

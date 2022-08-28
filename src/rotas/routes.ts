@@ -1,12 +1,9 @@
-import { response, Router } from 'express';
+import { Router } from 'express';
 import { salvarUsuario } from '../Controllers/Cadastro';
 import { Request, Response, NextFunction } from 'express';
 import { validarDados, validarToken } from '../validacao/seguranca';
-import { Cadastro } from '../util/interface';
-import verificarDados from '../validacao/funcoes';
-
-
-
+import { Cadastro, Produtos } from '../util/interface';
+import { pegarProdutos, salvarProduto } from '../Controllers/Produtos';
 
 const router = Router();
 
@@ -19,18 +16,17 @@ router.post('/cadastro/usuario', async (req: Request, res: Response, next: NextF
     .catch(err => res.sendStatus(err))
 })
 
-router.get('/', validarToken, async (req: Request, res: Response, next: NextFunction) => {
-  console.log('olá')
+router.post('/cadastro/produtos',validarToken,async (req: Request, res: Response) => {
+   await salvarProduto(req.body as Produtos)
+   .then(retorno => res.json(retorno).end())
+   .catch(err => res.sendStatus(err))
 })
-router.get('/cadastro/produtos',validarToken,(req: Request, res: Response) => {
+router.get('/produtos', validarToken, async (req: Request, res: Response, next: NextFunction) => {
+  await pegarProdutos()
+  .then(retorno => res.json(retorno).end())
+  .catch(err => res.sendStatus(err))
 })
-
-router.post('/login', validarDados, async (req: Request, res: Response, next: NextFunction) => {
-  console.log('olá')
-})
-
-
-
 
 
 export default router;
+

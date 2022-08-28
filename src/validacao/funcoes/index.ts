@@ -7,7 +7,12 @@ const verificarDados = {
     return false
   },
 
-  verificarNome: (nome: string) => {
+  verificarNome: (nome: string | string[]) => {
+      [...nome].forEach(item =>{
+        if(item.length < 0){
+          
+        }
+      })
     if (nome.length <= 0) return false
     return true
   },

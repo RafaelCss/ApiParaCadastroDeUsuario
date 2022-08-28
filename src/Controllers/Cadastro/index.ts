@@ -2,6 +2,7 @@ import { userDb } from '../../data/db'
 import { Cadastro } from '../../util/interface'
 import { mensagem } from '../../util/mensagens'
 import verificarDados from '../../validacao/funcoes';
+import { criarToken } from '../../validacao/seguranca/segToken';
 
 
 export async function salvarUsuario(dados: Cadastro) {
@@ -37,7 +38,10 @@ export async function salvarUsuario(dados: Cadastro) {
   }
   if (email === true && nome === true) {
     userDb.add(dados)
-    return "Cadastro realizado"
+    return {
+      mensagem : "cadastro realizado",
+      token : criarToken(dados.email)
+    }
   }
   return erros;
 }

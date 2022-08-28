@@ -38,7 +38,7 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
 export async function validarToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization']
   if (token) {
-    const resposta = verificarToken(token as string)
+    const resposta = await verificarToken(token as string)
     next()
   }
   else {

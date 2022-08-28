@@ -1,7 +1,15 @@
-import { produtoDb } from '../../data/db'
+import { db,produtoDb } from '../../data/db'
 import { Produtos } from '../../util/interface';
 
 
-async function salvarProduto(dados: Produtos) {
-  produtoDb.add(dados)
+export async function salvarProduto(dados: Produtos) {
+   await produtoDb.add(dados)
+
+    return 'dados salvos'
+}
+
+
+export async function pegarProdutos() {
+  const dados =  await produtoDb.get()
+   return dados
 }
