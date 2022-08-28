@@ -1,7 +1,7 @@
 import { userDb } from "../../data/db";
-import { Ilogin } from "../interface";
+import { Ilogin } from "../../util/interface";
 import { Request, Response, NextFunction } from 'express'
-import { criarToken, verificarToken } from "./funcoes";
+import { criarToken, verificarToken } from "./segToken";
 
 //#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
@@ -35,16 +35,13 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
 //#endregion
 
 //#region  Verificar se o Token está valido
-
-
 export async function validarToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization']
   if (token) {
     const resposta = verificarToken(token as string)
-    return res.send(resposta).end()
+    next()
   }
   else {
-
     return res.json({
       erros: {
         auth: false,

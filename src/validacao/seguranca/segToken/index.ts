@@ -8,7 +8,8 @@ export  function criarToken(id: string) {
 }
 
 export  function verificarToken(token: string) {
-  const validaToken = Jwt.verify(token, process.env.SECRET as string, (err , decode) =>{
+  const tokenLimpo =token.replace('Bearer ', '')
+  const validaToken = Jwt.verify(tokenLimpo, process.env.SECRET as string, (err , decode) =>{
     if(err){
       return err
     }
