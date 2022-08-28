@@ -39,6 +39,11 @@ export async function validarToken(req: Request, res: Response, next: NextFuncti
   const token = req.headers['authorization']
   if (token) {
     const resposta = await verificarToken(token as string)
+    .then(resp => {return resp})
+    .catch(err => { return err})
+    if(resposta.name === "TokenExpiredError"){
+      res.json('Acesso Negado')
+    }
     next()
   }
   else {
