@@ -1,27 +1,25 @@
 import { userDb } from '../../data/db'
 import { Cadastro } from '../../util/interface'
 import { mensagem } from '../../util/mensagens'
-import verificarDados from '../../validacao/funcoes';
+import verificarCampos from '../../validacao/funcoes';
 import { criarToken } from '../../validacao/seguranca/segToken';
 
 
 export async function salvarUsuario(dados: Cadastro) {
   // verifica se o email e nome são validos
-  let erros: Error[] = []
-  const email = verificarDados.verificarEmail(dados.email)
-  const nome = verificarDados.verificarNome(dados.nome)
-  const senha = verificarDados.verificarSenha(dados.senha)
-  if (email === false) {
-    erros.push(mensagem('email'))
-  }
-  if (nome === false) {
-    erros.push(mensagem('nome'))
-  }
-  if (senha === false) {
-    erros.push(mensagem('senha', 'Digite uma senha válida com mais de 5 caracteres'))
-  }
+  const email = verificarCampos.verificarEmail(dados.email)
+  const nome = verificarCampos.verificarString(dados.nome)
+  const senha = verificarCampos.verificarSenha(dados.senha)
 
-
+  if (email !== true || nome !== true || senha !== true) {
+    return {
+      erros: {
+        email: email,
+        nome: nome,
+        senha: senha,
+      }
+    }
+  }
   // verifica se já existe este email:
   const user = await userDb.where('email', '==', dados.email).get()
   let resposta: boolean | undefined;
@@ -33,17 +31,19 @@ export async function salvarUsuario(dados: Cadastro) {
     })
   }
   if (resposta === true) {
-    erros.push(mensagem('email', 'Este email já está cadastrado'))
-    return erros
+
+    return {
+      erros:
+        mensagem('email', 'Este email já está cadastrado')
+    }
   }
   if (email === true && nome === true) {
     userDb.add(dados)
     return {
-      mensagem : "cadastro realizado",
-      token : criarToken(dados.email)
+      mensagem: "cadastro realizado",
+      token: criarToken(dados.email)
     }
   }
-  return erros;
 }
 
 

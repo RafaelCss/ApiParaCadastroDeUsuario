@@ -16,12 +16,12 @@ router.post('/cadastro/usuario', async (req: Request, res: Response, next: NextF
     .catch(err => res.sendStatus(err))
 })
 
-router.post('/cadastro/produtos',validarToken,async (req: Request, res: Response) => {
+router.post('/cadastro/produtos',/* validarToken, */async (req: Request, res: Response) => {
    await salvarProduto(req.body as Produtos)
-   .then(retorno => res.json(retorno).end())
-   .catch(err => res.sendStatus(err))
+   .then(retorno => res.json(retorno).end().status(200))
+   .catch(err => res.send(err).status(400))
 })
-router.get('/produtos', validarToken, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/produtos', /* validarToken, */ async (req: Request, res: Response, next: NextFunction) => {
   await pegarProdutos()
   .then(retorno => res.json(retorno).end())
   .catch(err => res.sendStatus(err))

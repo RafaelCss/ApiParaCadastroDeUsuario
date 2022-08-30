@@ -33,9 +33,12 @@ export interface IToken {
 
  export interface Produtos {
   nome: string
-  valor: string
+  valor: number
   tipo :TipoProduto
-  fonernecedor : Fornecedor
+  fonernecedor : string
+  telefone : string
+  email :  string
+  vendedor : string
 }
 
   export  interface Fornecedor {
@@ -49,6 +52,13 @@ export interface IToken {
     limpeza = 2 ,
     higiene = 3
   }
+
+
+
+export interface ValToken{
+    name : string
+  }
+
 
  // padrão cadastro de produtos
 /*   {
