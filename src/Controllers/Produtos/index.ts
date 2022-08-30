@@ -23,8 +23,12 @@ export async function salvarProduto(dados: Produtos) {
       tipo
    }
 
-
-   return dadosValidados
+   if(nome  || vendedor || telefone  || email   || valor  ===  false || tipo === false)
+   {
+      return dadosValidados
+   }
+   await produtoDb.add(dados)
+   return { msg : " Cadastro realizado"}
 }
 
 

@@ -11,7 +11,7 @@ export async function salvarUsuario(dados: Cadastro) {
   const nome = verificarCampos.verificarString(dados.nome)
   const senha = verificarCampos.verificarSenha(dados.senha)
 
-  if (email !== true || nome !== true || senha !== true) {
+  if (email || nome || senha ) {
     return {
       erros: {
         email: email,
