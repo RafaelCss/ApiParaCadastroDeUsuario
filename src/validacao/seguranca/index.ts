@@ -11,12 +11,10 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
     .where('senha', '==', dados.senha).get()
   if (!resposta.empty) {
     resposta.forEach(item => {
-      return res.send({
-        dados: {
-          auth: true,
-          token: criarToken(item.id),
-          usuario: dados.email
-        }
+      return res.json({
+        auth: true,
+        token: criarToken(item.id),
+        usuario: dados.email
       }).status(201).end()
     })
     next()
@@ -38,16 +36,16 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
 export async function validarToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization']
   if (token) {
-    const resposta : ValToken= await verificarToken(token as string)
-    .then(resp => {return resp})
-    .catch(err => { return err})
-    if(resposta.name === "TokenExpiredError"){
+    const resposta: ValToken = await verificarToken(token as string)
+      .then(resp => { return resp })
+      .catch(err => { return err })
+    if (resposta.name === "TokenExpiredError") {
       res.json('Acesso Negado')
     }
     next()
   }
   else {
-     res.json({
+    res.json({
       erros: {
         auth: false,
         usuario: 'usuário não encontrado'

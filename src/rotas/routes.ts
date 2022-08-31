@@ -8,6 +8,7 @@ import { pegarProdutos, salvarProduto } from '../Controllers/Produtos';
 const router = Router();
 
 router.post('/login', validarDados, async (req: Request, res: Response, next: NextFunction) => {
+  next();
 })
 
 router.post('/cadastro/usuario', async (req: Request, res: Response, next: NextFunction) => {
