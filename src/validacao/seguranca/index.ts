@@ -5,6 +5,7 @@ import { criarToken, verificarToken } from "./segToken";
 
 //#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
+  console.log(req.headers)
   const dados: Ilogin = req.body
   const resposta = await userDb
     .where('email', '==', dados.email)
@@ -12,9 +13,11 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
   if (!resposta.empty) {
     resposta.forEach(item => {
       return res.json({
-        auth: true,
-        token: criarToken(item.id),
-        usuario: dados.email
+        dados: {
+          auth: true,
+          token: criarToken(item.id),
+          usuario: dados.email
+        }
       }).status(201).end()
     })
     next()
