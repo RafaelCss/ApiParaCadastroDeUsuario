@@ -6,13 +6,12 @@ import verificarCampos from '../../validacao/funcoes';
 
 
 export async function salvarProduto(dados: Produtos) {
-   // await produtoDb.add(dados)
-   const nome =  verificarCampos.verificarString(dados.nome as string, 'nome')
-   const vendedor = verificarCampos.verificarString(dados.vendedor as string, 'vendedor')
+   const nome =  verificarCampos.verificarString(dados.nomeProduto as string, 'nome')
+   const vendedor = verificarCampos.verificarString(dados.nomeFornecedor as string, 'vendedor')
    const telefone = verificarCampos.verificarString(dados.telefone as string, 'telefone')
    const email  = verificarCampos.verificarEmail(dados.email as string)
-   const valor = verificarCampos.validarNumber(dados.valor as number)
-   const tipo = verificarCampos.validarNumber(dados.tipo as number)
+   const valor = verificarCampos.verificarString(dados.valor as string)
+   const tipo = verificarCampos.validarTipo(dados.tipo as number)
 
    const dadosValidados ={
       nome,
@@ -23,7 +22,7 @@ export async function salvarProduto(dados: Produtos) {
       tipo
    }
 
-   if(nome  || vendedor || telefone  || email   || valor  ===  false || tipo === false)
+   if(nome  || vendedor || telefone  || email   || valor  || tipo === false)
    {
       return dadosValidados
    }

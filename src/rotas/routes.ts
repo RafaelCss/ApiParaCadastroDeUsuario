@@ -9,7 +9,7 @@ const router = Router();
 
 router.post('/login', validarDados)
 
-router.post('/cadastro/usuario', async (req: Request, res: Response, next: NextFunction) => {
+router.post('/cadastro/usuario',async (req: Request, res: Response, next: NextFunction) => {
   await salvarUsuario(req.body as Cadastro)
     .then(retorno => res.json(retorno).end())
     .catch(err => res.sendStatus(err))
@@ -20,7 +20,7 @@ router.post('/cadastro/produtos',validarToken, async (req: Request, res: Respons
    .then(retorno => res.json(retorno).end().status(200))
    .catch(err => res.send(err).status(400))
 })
-router.get('/produtos', validarToken,  async (req: Request, res: Response, next: NextFunction) => {
+router.get('/produtos',validarToken, async (req: Request, res: Response, next: NextFunction) => {
   await pegarProdutos()
   .then(retorno => res.json(retorno).end())
   .catch(err => res.sendStatus(err))

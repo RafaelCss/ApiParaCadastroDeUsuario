@@ -32,13 +32,13 @@ export interface IToken {
 
 
  export interface Produtos {
-  nome: string
-  valor: number
-  tipo :TipoProduto
-  fonernecedor : string
+  nomeProduto : string
+  tipo : TipoProduto
+  valor : string
+  descricao : string
+  nomeFornecedor : string
+  email : string
   telefone : string
-  email :  string
-  vendedor : string
 }
 
   export  interface Fornecedor {

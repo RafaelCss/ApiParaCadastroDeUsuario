@@ -5,7 +5,6 @@ import { criarToken, verificarToken } from "./segToken";
 
 //#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
-  console.log(req.headers)
   const dados: Ilogin = req.body
   const resposta = await userDb
     .where('email', '==', dados.email)
@@ -42,10 +41,11 @@ export async function validarToken(req: Request, res: Response, next: NextFuncti
     const resposta: ValToken = await verificarToken(token as string)
       .then(resp => { return resp })
       .catch(err => { return err })
-    if (resposta.name === "TokenExpiredError") {
-      res.json('Acesso Negado')
+    if (resposta.name !== "TokenExpiredError") {
+        next()
+    } else {
+      return res.json('Acesso Negado').end().status(400)
     }
-    next()
   }
   else {
     res.json({

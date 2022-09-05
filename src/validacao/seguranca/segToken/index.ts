@@ -1,5 +1,6 @@
 import Jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv'
+import { json } from 'express';
 dotenv.config()
 
 export  function criarToken(id: string) {
@@ -11,9 +12,9 @@ export async function verificarToken(token: string) {
   const tokenLimpo =token.replace('Bearer ', '')
   const validaToken = Jwt.verify(tokenLimpo, process.env.SECRET as string, (err , decode) =>{
     if(err){
-      return err
+      return JSON.stringify(err)
     }
-    return decode
+    return JSON.stringify(decode)
   })
   return validaToken
 }
