@@ -37,17 +37,17 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
 //#region  Verificar se o Token está valido
 export async function validarToken(req: Request, res: Response, next: NextFunction) {
   const token = req.headers['authorization']
+  console.log(token)
   if (token) {
     const resposta: ValToken = await verificarToken(token as string)
       .then(resp => { return resp })
       .catch(err => { return err })
+      console.log(resposta)
     if (resposta.name !== "TokenExpiredError") {
-        next()
-    } else {
-      return res.json('Acesso Negado').end().status(400)
+      next()
     }
-  }
-  else {
+    return res.json('Acesso Negado !').status(400).end()
+  } else {
     res.json({
       erros: {
         auth: false,

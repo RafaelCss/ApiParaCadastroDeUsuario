@@ -1,21 +1,23 @@
 import { Router } from 'express';
-import { salvarUsuario } from '../Controllers/Cadastro';
+//import { salvarUsuario } from '../Controllers/CadastroUsuario';
 import { Request, Response, NextFunction } from 'express';
 import { validarDados, validarToken } from '../validacao/seguranca';
 import { Cadastro, Produtos } from '../util/interface';
-import { pegarProdutos, salvarProduto } from '../Controllers/Produtos';
+import { pegarProdutos, salvarProduto } from '../Controllers/CadastroProdutos';
+import { SalvarUsuario } from '../Controllers/CadastroUsuario/salvarusuario';
 
 const router = Router();
 
 router.post('/login', validarDados)
 
 router.post('/cadastro/usuario',async (req: Request, res: Response, next: NextFunction) => {
-  await salvarUsuario(req.body as Cadastro)
+   const salvar = new SalvarUsuario()
+   await salvar.cadastrar(req.body as Cadastro)
     .then(retorno => res.json(retorno).end())
     .catch(err => res.sendStatus(err))
 })
 
-router.post('/cadastro/produtos',validarToken, async (req: Request, res: Response) => {
+router.post('/cadastro/produtos',/* validarToken, */ async (req: Request, res: Response) => {
    await salvarProduto(req.body as Produtos)
    .then(retorno => res.json(retorno).end().status(200))
    .catch(err => res.send(err).status(400))
