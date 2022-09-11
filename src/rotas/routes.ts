@@ -3,8 +3,9 @@ import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
 import { validarDados, validarToken } from '../validacao/seguranca';
 import { Cadastro, Produtos } from '../util/interface';
-import { pegarProdutos, salvarProduto } from '../Controllers/CadastroProdutos';
+import { pegarProdutos } from '../Controllers/CadastroProdutos/produto';
 import { SalvarUsuario } from '../Controllers/CadastroUsuario/salvarusuario';
+import { SalvarProduto } from '../Controllers/CadastroProdutos/salvarProduto';
 
 const router = Router();
 
@@ -18,7 +19,8 @@ router.post('/cadastro/usuario',async (req: Request, res: Response, next: NextFu
 })
 
 router.post('/cadastro/produtos',/* validarToken, */ async (req: Request, res: Response) => {
-   await salvarProduto(req.body as Produtos)
+   const salvar = new SalvarProduto()
+   await salvar.cadastrar(req.body as Produtos)
    .then(retorno => res.json(retorno).end().status(200))
    .catch(err => res.send(err).status(400))
 })
