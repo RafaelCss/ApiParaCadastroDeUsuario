@@ -18,7 +18,7 @@ router.post('/cadastro/usuario',async (req: Request, res: Response, next: NextFu
     .catch(err => res.sendStatus(err))
 })
 
-router.post('/cadastro/produtos',/* validarToken, */ async (req: Request, res: Response) => {
+router.post('/cadastro/produtos', validarToken,   async (req: Request, res: Response, next: NextFunction) => {
    const salvar = new SalvarProduto()
    await salvar.cadastrar(req.body as Produtos)
    .then(retorno => res.json(retorno).end().status(200))

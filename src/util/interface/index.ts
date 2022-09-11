@@ -56,7 +56,8 @@ export interface IToken {
 
 
 export interface ValToken{
-    name : string
+    token : string
+    JsonWebTokenError : string
   }
 
 
