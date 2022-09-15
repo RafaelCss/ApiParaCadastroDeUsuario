@@ -5,7 +5,7 @@ import { mensagem } from '../../util/mensagens'
 import VerificarCampos from '../../validacao/funcoes/mensagens';
 import { criarToken } from '../../validacao/seguranca/segToken';
 
-export class CriarUsuario  {
+export class CriarUsuario {
   private props: Cadastro;
 
   get nome(): string {
@@ -50,17 +50,19 @@ export class CriarUsuario  {
       return cadastrar
     }
 
-    return { email, senha, nome }
+    return { erros :{ email, senha, nome} }
   }
   protected async cadastrarBanco({ email, nome, senha }: Cadastro) {
-      let resultado
+    let resultado
     const jaExiste = (await userDb.where('email', '==', email).get()).forEach(item => {
       const { email }: DocumentData = item.data()
-      resultado= email
+      resultado = email
       return
     })
     if (resultado === email) {
-      return mensagem('email', `Este email : ${this.email} já existe`)
+      return {
+        erros: mensagem('email', `Este email : ${this.email} já existe`)
+      }
     }
     const cadastroBanco = await userDb.add({
       email,

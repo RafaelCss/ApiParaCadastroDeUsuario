@@ -1,8 +1,7 @@
 import { userDb } from "../../data/db";
-import { Ilogin, ValToken } from "../../util/interface";
+import { Ilogin } from "../../util/interface";
 import { Request, Response, NextFunction } from 'express'
 import { criarToken, verificarToken } from "./segToken";
-
 //#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
   const dados: Ilogin = req.body
@@ -11,11 +10,13 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
     .where('senha', '==', dados.senha).get()
   if (!resposta.empty) {
     resposta.forEach(item => {
+      const data =item.data();
+      const nome =  [data].map(item=> item.nome)
       return res.json({
         dados: {
           auth: true,
           token: criarToken(item.id),
-          usuario: dados.email
+          usuario: nome
         }
       }).status(201).end()
     })
