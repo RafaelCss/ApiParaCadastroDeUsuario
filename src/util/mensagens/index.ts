@@ -4,7 +4,7 @@
 
     const Erro : Error={
        name : campo as string ,
-       message : mensagem ? mensagem : `Ei , preciso desse campo preenchido : ${campo}`
+       message : mensagem ? mensagem : `Ei, preciso desse campo preenchido`
     }
 
       return Erro
