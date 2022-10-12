@@ -14,5 +14,5 @@
     "usuarios",
     "validacao"
   ],
-  "dotenv.enableAutocloaking": true
+  "dotenv.enableAutocloaking": false
 }

@@ -6,7 +6,6 @@ import logger from 'morgan';
  const app = express();
 
 app.use(express.json());
-app.use(cors());
 app.use(logger('dev'));
 app.use((req, res, next) => {
 	//Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
