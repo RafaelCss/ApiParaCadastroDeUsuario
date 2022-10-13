@@ -24,7 +24,7 @@ router.post('/cadastro/produtos', validarToken,   async (req: Request, res: Resp
    .then(retorno => res.json(retorno).end().status(200))
    .catch(err => res.send(err).status(400))
 })
-router.get('/produtos',validarToken, async (req: Request, res: Response, next: NextFunction) => {
+router.get('/produtos',/* validarToken */ async (req: Request, res: Response, next: NextFunction) => {
   await pegarProdutos()
   .then(retorno => res.json(retorno).end())
   .catch(err => res.sendStatus(err))
