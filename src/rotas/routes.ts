@@ -9,6 +9,9 @@ import { SalvarProduto } from '../Controllers/CadastroProdutos/salvarProduto';
 
 const router = Router();
 
+router.get('/', async (req : Request , res : Response)=>{
+   res.send("Olá seja bem-vindo")
+})
 router.post('/login', validarDados)
 
 router.post('/cadastro/usuario',async (req: Request, res: Response, next: NextFunction) => {
