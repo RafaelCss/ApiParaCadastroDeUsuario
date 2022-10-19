@@ -34,7 +34,7 @@ class VerificarCampos {
   }
 
   verificarSenha(senha: string) {
-    if (senha.length > 0 || senha.length > 5) {
+    if (senha && senha.length > 0 ) {
       return senha
     }
     return this.erros('senha')
