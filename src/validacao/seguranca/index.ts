@@ -3,6 +3,7 @@ import { userDb } from "../../data/db";
 import { Ilogin } from "../../util/interface";
 import VerificarCampos from '../../validacao/funcoes/mensagens';
 import { criarToken, verificarToken } from "./segToken";
+
 //#region Validar usuario ao logar
 export async function validarDados(req: Request, res: Response, next: NextFunction) {
   const dados: Ilogin = req.body
