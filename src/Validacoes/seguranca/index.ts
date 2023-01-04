@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { userDb } from "../../data/db";
 import { Ilogin } from "../../util/interface";
-import VerificarCampos from '../../validacao/funcoes/mensagens';
+import VerificarCampos from '../../util/mensagens/mensagens';
+import Validar from '../funcoes/validar';
 import { criarToken, verificarToken } from "./segToken";
 
 //#region Validar usuario ao logar
@@ -12,9 +13,7 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
   const senha = validacao.verificarSenha(dados.senha)
 
   if (typeof email === 'string' && typeof senha === 'string') {
-    const resposta = await userDb
-      .where('email', '==', dados.email)
-      .where('senha', '==', dados.senha).get()
+    const resposta = new Validar();
     if (!resposta.empty) {
       resposta.forEach(item => {
         if (item.id.length > 0) {

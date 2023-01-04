@@ -2,8 +2,8 @@ import { DocumentData } from 'firebase-admin/firestore';
 import { userDb } from '../../data/db'
 import { Cadastro } from '../../util/interface'
 import { mensagem } from '../../util/mensagens'
-import VerificarCampos from '../../validacao/funcoes/mensagens';
-import { criarToken } from '../../validacao/seguranca/segToken';
+import VerificarCampos from '../../util/mensagens/mensagens';
+import { criarToken } from '../../Validacoes/seguranca/segToken';
 
 export class CriarUsuario {
   private props: Cadastro;

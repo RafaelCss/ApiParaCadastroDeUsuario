@@ -1,6 +1,6 @@
 import { db, produtoDb } from '../../data/db'
 import { Produtos, TipoProduto } from '../../util/interface';
-import VerificarCampos from '../../validacao/funcoes/mensagens';
+import VerificarCampos from '../../util/mensagens/mensagens';
 
 
 

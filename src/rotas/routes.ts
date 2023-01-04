@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Request, Response, NextFunction } from 'express';
-import { validarDados, validarToken } from '../validacao/seguranca';
+import { validarDados, validarToken } from '../Validacoes/seguranca';
 import { Cadastro, Produtos } from '../util/interface';
 import { pegarProdutos } from '../Controllers/CadastroProdutos/produto';
 import { SalvarUsuario } from '../Controllers/CadastroUsuario/salvarusuario';
