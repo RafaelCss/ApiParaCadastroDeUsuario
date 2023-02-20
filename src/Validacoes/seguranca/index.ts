@@ -13,7 +13,9 @@ export async function validarDados(req: Request, res: Response, next: NextFuncti
   const senha = validacao.verificarSenha(dados.senha)
 
   if (typeof email === 'string' && typeof senha === 'string') {
-    const resposta = new Validar();
+    const resposta = await userDb
+    .where('email', '==', dados.email)
+    .where('senha', '==', dados.senha).get()
     if (!resposta.empty) {
       resposta.forEach(item => {
         if (item.id.length > 0) {
