@@ -1,9 +1,25 @@
-# APi em produção na Heroku para login de usuarios  e cadastro de produtos
+# Api simples para cadastro
 
-## Banco de dados firebase
- ## Atenticação JWT
+## Objetivo :
 
-### padrão cadastro de produtos
+- Desenvolver habilidades 
+- Conhecer coisas 
+- Aprimorar novas ideias 
+- Criar código
+
+
+## Tecnologias :
+
+- JWt
+- Express 
+- TypeScript
+- NodeJs
+- FireBase
+- Amor 
+
+
+### Exemplo de envio para api.
+```javascript
   {
     "nome"  : "",
     "valor" : "",
@@ -13,4 +29,8 @@
     "email" :  "",
     "vendedor" : ""
      }
-  }
+  
+}
+```
+
+### Para rodar npm run dev
